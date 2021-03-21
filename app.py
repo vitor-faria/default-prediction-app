@@ -20,14 +20,14 @@ def get_default_prediction(pipeline, features):
 
 def app():
     pipeline = load_model_pipeline()
-    
-    st.sidebar.title("Loan default 2")
+
+    st.sidebar.title("Loan Default Probability Calculator")
     
     # input features dict
     features = {}
     
     # Streamlit cheat sheet: https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py
-    st.sidebar.subheader("Client info teste:")
+    st.sidebar.subheader("Client info:")
     features["client_gender"] = st.sidebar.radio('Gender:', ["M", "F", "I"])
     features["client_age"] = st.sidebar.slider('Client age(years):', 21, 100, 50)
     features["acc_age"] = st.sidebar.slider('Account age(years):', 10, 50, 25)
@@ -36,7 +36,7 @@ def app():
     features["loan_amount"] = st.sidebar.slider('Loan amount($):', 1000, 1000000, 100000, step=1000)
     features["loan_duration"] = st.sidebar.slider('Loan duration(days):', 12, 60, 30)
     
-    st.sidebar.subheader("Location info")
+    st.sidebar.subheader("Location info:")
     # District name, Region name, District population, District average income
     district_options = [
         ("Hl.m. Praha", "Prague", 1204953, 12541),
@@ -56,7 +56,7 @@ def app():
     X, y_pred = get_default_prediction(pipeline, features)
     
     st.subheader('Features: ')
-    st.write(X)
+    st.write(X.T)
     
     st.subheader(f"Probability of default: {y_pred:.1%}")
 

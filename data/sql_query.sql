@@ -9,8 +9,8 @@ SELECT
     loan.duration AS loan_duration,
 
     -- account and client features
-    TIMESTAMPDIFF(year, account.date, NOW()) AS acc_age,
-    TIMESTAMPDIFF(year, client.birth_date, NOW()) AS client_age,
+    TIMESTAMPDIFF(year, account.date, loan.date) AS acc_age,
+    TIMESTAMPDIFF(year, client.birth_date, loan.date) AS client_age,
     client.gender AS client_gender,
 
     -- district features

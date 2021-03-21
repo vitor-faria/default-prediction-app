@@ -4,7 +4,6 @@ from sqlalchemy import create_engine
 
 print("[INFO] Start bulding the dataset...")
 
-
 # create a connection with a mariadb financial database
 # We can check the database documentation here: https://relational.fit.cvut.cz/dataset/financial
 engine = create_engine('mysql+pymysql://guest:relational@relational.fit.cvut.cz:3306/financial')
