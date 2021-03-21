@@ -1,0 +1,10 @@
+name: streamlit_tera #Environment name, to update the env run: conda env update --file environment.yml
+dependencies:
+  - python=3.8
+  - pip:
+    - streamlit==0.79.0 # Lib to build a fast and simple ML webapp
+    - seaborn==0.11.1 # Plot lib
+    - scikit-learn==0.24.1 # Lib for ML models
+    - category-encoders==2.2.2 # Lib with some categorical encoding algorithms
+    - SQLAlchemy==1.4.2 # Set of tools for working with databases and Python
+    - PyMySQL==1.0.2 # Python MySQL and Maria DB client library
