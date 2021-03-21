@@ -22,7 +22,7 @@ model should be trained with the following commands
 
 ```
 python data/build_dataset.py
-python model/train.py
+python model/train_v1.py
 ```
 
 #### Running Locally
@@ -30,5 +30,5 @@ python model/train.py
 To run the streamlit application in your local host use
 
 ```
-streamlit run app.py
+streamlit run app_v1.py
 ```

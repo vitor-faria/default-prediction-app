@@ -8,3 +8,4 @@ dependencies:
     - category-encoders==2.2.2 # Lib with some categorical encoding algorithms
     - SQLAlchemy==1.4.2 # Set of tools for working with databases and Python
     - PyMySQL==1.0.2 # Python MySQL and Maria DB client library
+    - pandas_profiling==2.11.0 # Lib for EDA

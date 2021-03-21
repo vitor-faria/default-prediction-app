@@ -8,12 +8,14 @@ print("[INFO] Start bulding the dataset...")
 # We can check the database documentation here: https://relational.fit.cvut.cz/dataset/financial
 engine = create_engine('mysql+pymysql://guest:relational@relational.fit.cvut.cz:3306/financial')
 
-with open('data/sql_query.sql', 'r') as file:
+version = 1  # Keep latest version
+
+with open(f'data/query_dataset_v{version}.sql', 'r') as file:
     query_statement = file.read()
 
-print("[INFO] Querying the data...")
+print(f"[INFO] Running query_dataset_v{version}.sql...")
 
 df = pd.read_sql_query(query_statement, engine)
-df.to_csv('data/dataset.csv', index=False)  
+df.to_csv(f'data/dataset_v{version}.csv', index=False)
 
-print("[INFO] Dataset created")
+print(f"[INFO] Dataset created with name dataset_v{version}.csv")
