@@ -1,11 +1,11 @@
 from joblib import load as joblib_load
 import pandas as pd
 import streamlit as st
-from model.train_v1 import CAT_COLS, NUM_COLS
+from model.train import CAT_COLS, NUM_COLS
 
 
 def load_model_pipeline():
-    return joblib_load("model/model_v1.joblib")
+    return joblib_load("model/model.joblib")
 
 
 def get_default_prediction(pipeline, features):
