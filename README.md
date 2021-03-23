@@ -10,7 +10,7 @@ To create the development environment it's recommended to use conda.
 Run the following commands to get the environment ready
 
 ```
-conda create -n ENVIRONMENT_NAME python=3.7
+conda create -n ENVIRONMENT_NAME python=3.8
 conda activate ENVIRONMENT_NAME
 pip install -r requirements.txt
 ```
