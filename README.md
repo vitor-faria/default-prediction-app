@@ -32,3 +32,7 @@ To run the streamlit application in your local host use
 ```
 streamlit run app.py
 ```
+
+## Application URL
+
+Production: https://default-prediction-app.herokuapp.com/
