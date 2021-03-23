@@ -3,16 +3,16 @@
 Simple streamlit application to interact with a ML classification model based on 
 [PKDD'99 default financial data](https://relational.fit.cvut.cz/dataset/Financial).
 
-To setup the project conda environment run the following command on the root folder:
+## Development Environment
+
+To create the development environment it's recommended to use conda.
+
+Run the following commands to get the environment ready
 
 ```
-conda env create -f environment.yml
-```
-
-Then activate the created development environment using
-
-```
-conda activate streamlit_tera
+conda create -n ENVIRONMENT_NAME python=3.7
+conda activate ENVIRONMENT_NAME
+pip install -r requirements.txt
 ```
 
 #### Creating dataset and model
