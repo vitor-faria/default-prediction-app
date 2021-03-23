@@ -4,6 +4,7 @@ import streamlit as st
 from model.train import CAT_COLS, NUM_COLS
 
 
+@st.cache
 def load_model_pipeline():
     return joblib_load("model/model_v1.joblib")
 
@@ -19,8 +20,14 @@ def get_default_prediction(pipeline, features):
     return X, probability
 
 
+@st.cache
+def get_districts_df():
+    return pd.read_csv('data/districts.csv')
+
+
 def app():
     pipeline = load_model_pipeline()
+    districts = get_districts_df()
 
     st.sidebar.title("Loan Default Probability Calculator")
     
@@ -29,7 +36,7 @@ def app():
     
     # Streamlit cheat sheet: https://share.streamlit.io/daniellewisdl/streamlit-cheat-sheet/app.py
     st.sidebar.subheader("Client info:")
-    features["account_age_at_loan_months"] = st.sidebar.slider('Account age (months):', 10, 50, 25)
+    features["account_age_at_loan_months"] = st.sidebar.slider('Account age (months):', 0, 50, 25)
     features["has_card"] = st.sidebar.checkbox('Has credit card?') * 1
     
     st.sidebar.subheader("Loan info:")
@@ -37,18 +44,13 @@ def app():
     features["loan_duration"] = st.sidebar.slider('Loan duration (months):', 12, 60, 30)
     
     st.sidebar.subheader("Location info:")
-    # District name and average income
-    district_options = [
-        ("Hl.m. Praha (Prague)", 12541),
-        ("Karvina (north Moravia)", 10177),
-        ("Brno - mesto (south Moravia)", 9897),
-        ("Ostrava - mesto (north Moravia)", 10673),
-        ("Zlin (south Moravia)", 9624)
-    ]
-    
-    district = st.sidebar.selectbox("District:", district_options, format_func=lambda x: x[0])
-
-    features["district_avg_salary"] = district[1]
+    region_choices = districts['district_region'].drop_duplicates()
+    chosen_region = st.sidebar.selectbox('CZ Region:', region_choices.to_list())
+    district_choices = districts["district_name"].loc[districts['district_region'] == chosen_region]
+    chosen_district = st.sidebar.selectbox('District:', district_choices.to_list())
+    features["district_avg_salary"] = districts["district_avg_salary"].loc[
+        districts['district_name'] == chosen_district
+    ].iloc[0]
 
     X, y_pred = get_default_prediction(pipeline, features)
     
@@ -56,6 +58,9 @@ def app():
     st.write(X.T)
     
     st.subheader(f"Probability of default: {y_pred:.1%}")
+    threshold = 0.5
+    yes_no = 'not ' if y_pred >= threshold else ''
+    st.subheader(f"It's recommended {yes_no}to grant the loan.")
 
 
 if __name__ == "__main__":

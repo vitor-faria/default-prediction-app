@@ -4,3 +4,5 @@ scikit-learn==0.24.1
 SQLAlchemy==1.4.2
 PyMySQL==1.0.2
 pandas_profiling==2.11.0
+pandas==1.2.3
+joblib==1.0.1
