@@ -5,7 +5,7 @@ from model.train import CAT_COLS, NUM_COLS
 
 
 def load_model_pipeline():
-    return joblib_load("model/model.joblib")
+    return joblib_load("model/model_v1.joblib")
 
 
 def get_default_prediction(pipeline, features):
